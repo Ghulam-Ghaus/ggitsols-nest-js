@@ -1,0 +1,9 @@
+ => node , nest/cli
+ => initialize project -> nest new project-name
+ => start the project -> npm run start:dev / npm start 
+ => .env setup -> install @type dotenv atleat setup port from env
+ => start (stubleshoot)  (install , import, forRoot global true, typeORM toot async)
+ => generate resources -> nest g res res-name
+ => entity, dto's, task modlue import entity
+ => controler as it 
+ => service -> constroctor entity inject -> task insert , find , delete, update 
