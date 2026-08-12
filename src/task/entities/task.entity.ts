@@ -6,13 +6,16 @@ export class Task {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    @Column({nullable: true})
+    @Column({ nullable: true })
     title!: string;
 
     @Column()
     description!: string;
 
-    @Column({default: "draft"})
+    @Column({ default: "draft" })
     status!: string;
+
+    @Column({ nullable: true }) 
+    admin_id?: number;
 
 }
