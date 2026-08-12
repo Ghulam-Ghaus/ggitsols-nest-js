@@ -18,4 +18,6 @@ export class Task {
     @Column({ nullable: true }) 
     admin_id?: number;
 
+    @Column()
+    employee_id!: number;
 }
