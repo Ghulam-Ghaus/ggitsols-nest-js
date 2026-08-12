@@ -14,5 +14,6 @@ export class Task {
 
     @Column({default: "draft"})
     status!: string;
-
+    @Column()
+    employee_id!: number;
 }
