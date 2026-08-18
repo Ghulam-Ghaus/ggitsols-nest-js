@@ -1,15 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 import { CreateEmployeeDto } from './dto/create-employee.dto';
 import { UpdateEmployeeDto } from './dto/update-employee.dto';
+import { FindEmployeeDto } from './dto/find-employee.dto';
 
 @Controller('employee')
 export class EmployeeController {
   constructor(private readonly employeeService: EmployeeService) {}
 
-  @Post()
-  create(@Body() createEmployeeDto: CreateEmployeeDto) {
-    return this.employeeService.create(createEmployeeDto);
+  @Post('searchwithpost')
+  async searchwithpost(@Body() findEmployeeDto: FindEmployeeDto) {
+    return this.employeeService.searchwithpost(findEmployeeDto);
+  }
+  @Get("search")
+  async search(@Query() employeeObject:FindEmployeeDto){
+    console.log(employeeObject)
+    return this.employeeService.search(employeeObject)
   }
 
   @Get()
