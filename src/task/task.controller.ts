@@ -14,39 +14,30 @@ export class TaskController {
     return this.taskService.create(createTaskDto);
   }
 
-  // creating the new end point
-@Get('search')//method
- async search(@Query() findObject: FindTaskDto){//gave End point a name
-  console.log(findObject)
-  return this.taskService.search(findObject)
+  @Get()
+  findAll(@Query() findTaskDto: FindTaskDto) {
+    return this.taskService.findAll(findTaskDto);
+  }
 
-}
-@Get()
-findAll() {
-  return this.taskService.findAll();
-}
 
-@Get(':id')
-findOne(@Param('id') id: string) {
-  return this.taskService.findOne(+id);
-}
+  @Get('search')
+  search(@Query() findTask: FindTaskDto){
+    return this.taskService.search(findTask)
+  }
 
-@Patch(':id')
-update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
-  return this.taskService.update(+id, updateTaskDto);
-}
+  
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.taskService.findOne(+id);
+  }
 
-@Delete(':id')
-remove(@Param('id') id: string) {
-  return this.taskService.remove(+id);
-}
-  // creating the new end point
-  // @Get('search')//method
-  // search(@Param('stem') stem:string){//gave End point a name
-  //   console.log('stem')
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
+    return this.taskService.update(+id, updateTaskDto);
+  }
 
-    // return this.taskService.search(stem)
-
-  // }     
-
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.taskService.remove(+id);
+  }
 }

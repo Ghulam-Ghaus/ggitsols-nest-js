@@ -1,7 +1,10 @@
 export class FindTaskDto {
-    id!:number;
+    searchTerm!: string;
+    id!: number;
     title!: string;
     description!: string;
     status!: string;
-    employee_id!:number;
+    adminId!: number;
+
+
 }
