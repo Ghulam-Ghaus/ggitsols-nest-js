@@ -4,4 +4,6 @@ import { CreateAdminDto } from './create-admin.dto';
 export class UpdateAdminDto extends PartialType(CreateAdminDto) {
     password!: string;
     status!: string;
+    name!: string;
+    email!: string;
 }
