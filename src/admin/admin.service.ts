@@ -7,7 +7,16 @@ import { UpdateAdminDto } from './dto/update-admin.dto';
 import { Task } from 'src/task/entities/task.entity';
 import { FindTaskDto } from 'src/task/dto/find-task.dto';
 import { FindAdminDto } from './dto/find-admin.dto';
+import { create } from 'domain';
+@Injectable()
+export class Adminservice{
+  async create(FindAdminDto: FindAdminDto){
+    return 'This action adds a new admin';
+    data:FindAdminDto;
 
+
+  }
+}
 @Injectable()
 export class AdminService {
   constructor(
@@ -49,22 +58,22 @@ export class AdminService {
   async search(findadminDto: FindAdminDto) {
     console.log(findadminDto)
   
-    let query = this.adminsRepository.createQueryBuilder('admin');
+    let query = this.adminsRepository.createQueryBuilder('admins');
   
     if(findadminDto.name){
-    query = query.andWhere(`admin.name like '%${findadminDto.name}%'`);
+    query = query.andWhere(`admins.name like '%${findadminDto.name}%'`);
     }
-  
-    if(findadminDto.password){
-      query = query.andWhere(`admin.password like '%${findadminDto.password}%'`);
+
+    if(findadminDto.email){
+    query = query.andWhere(`admins.email like '%${findadminDto.email}%'`);
     }
   
     if(findadminDto.taskId){
-      query = query.andWhere(`admin.taskId = ${findadminDto.taskId}`);
+      query = query.andWhere(`admins.taskId = ${findadminDto.taskId}`);
     }
   
     const admin = await query.getMany();     
-    if(admin.length !== 0) {
+    if(admin.length === 0) {
       return 'No admins found!';
     }
     return admin;
