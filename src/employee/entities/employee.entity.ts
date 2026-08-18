@@ -9,5 +9,5 @@ export class Employee {
     @Column()
     e_email!: string;
     
-}   
+}     
 
