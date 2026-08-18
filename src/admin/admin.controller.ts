@@ -4,14 +4,15 @@ import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
 import { FindTaskDto } from 'src/task/dto/find-task.dto';
 import { FindAdminDto } from './dto/find-admin.dto';
+import { create } from 'domain';
 
 @Controller('admin')
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
  
-  @Post()
-  create(@Body() createAdminDto: CreateAdminDto) {
-    return this.adminService.create(createAdminDto);
+  @Post('create')
+  async create(@Body() FindadminDto: FindAdminDto) {
+    return this.adminService.create(FindadminDto);
   }
 
   @Get('search')

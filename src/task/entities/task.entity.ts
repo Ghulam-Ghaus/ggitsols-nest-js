@@ -18,6 +18,5 @@ export class Task {
     @Column({ name: 'admin_id', nullable: true }) 
     adminId?: number;
 
-    @Column()
-    employee_id!: number;
+  
 }
