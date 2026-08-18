@@ -16,4 +16,7 @@ export class Admin {
 
   @Column({ default: 'draft' })
   status!: string;
+
+  @Column({ nullable: true})
+  taskId!: number;
 }

@@ -5,6 +5,8 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateAdminDto } from './dto/update-admin.dto';
 import { Task } from 'src/task/entities/task.entity';
+import { FindTaskDto } from 'src/task/dto/find-task.dto';
+import { FindAdminDto } from './dto/find-admin.dto';
 
 @Injectable()
 export class AdminService {
@@ -43,4 +45,33 @@ export class AdminService {
   async remove(id: number) {
     return await this.adminsRepository.delete(id)
   }
+
+  async search(findadminDto: FindAdminDto) {
+    console.log(findadminDto)
+  
+    let query = this.adminsRepository.createQueryBuilder('admin');
+  
+    if(findadminDto.name){
+    query = query.andWhere(`admin.name like '%${findadminDto.name}%'`);
+    }
+  
+    if(findadminDto.password){
+      query = query.andWhere(`admin.password like '%${findadminDto.password}%'`);
+    }
+  
+    if(findadminDto.taskId){
+      query = query.andWhere(`admin.taskId = ${findadminDto.taskId}`);
+    }
+  
+    const admin = await query.getMany();     
+    if(admin.length !== 0) {
+      return 'No admins found!';
+    }
+    return admin;
+  
+  }
+   
+  
+  
+  
 }

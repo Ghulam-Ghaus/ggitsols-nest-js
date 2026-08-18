@@ -15,8 +15,8 @@ export class Task {
     @Column({ default: "draft" })
     status!: string;
 
-    @Column({ nullable: true }) 
-    admin_id?: number;
+    @Column({ name: 'admin_id', nullable: true }) 
+    adminId?: number;
 
     @Column()
     employee_id!: number;
