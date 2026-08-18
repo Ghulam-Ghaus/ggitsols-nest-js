@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Param, Query } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -30,6 +30,9 @@ export class TaskService {
     return await this.tasksRepository.findOne({
       where: { id }
     })
+    // if (!task) {
+    //   return { status: 404, message: `task related to the id ${id} is not found` }
+    // }
   }
 
   async update(id: number, updateTaskDto: UpdateTaskDto) {
@@ -39,7 +42,20 @@ export class TaskService {
     if (!task) {
       return 'task not found!'
     }
-    task.status = updateTaskDto.status
+    if(task.title){
+      task.status = updateTaskDto.status
+      
+    }
+    if(task.title){
+    task.description=updateTaskDto.description
+    }
+    if(task.title){
+      task.title=updateTaskDto.title
+    }
+    if(task.title){
+      task.employee_id= updateTaskDto.employee_id
+
+    }    
     return this.tasksRepository.save(task)
   }
 
@@ -60,9 +76,9 @@ async search(findTaskDto: FindTaskDto) {
     query = query.andWhere(`task.status like '%${findTaskDto.status}%'`);
   }
 
-  if(findTaskDto.adminId){
-    query = query.andWhere(`task.admin_id = ${findTaskDto.adminId}`);
-  }
+  // if(findTaskDto.adminId){
+  //   query = query.andWhere(`task.admin_id = ${findTaskDto.adminId}`);
+  // }
 
   const tasks = await query.getMany();
   if(tasks.length === 0) {

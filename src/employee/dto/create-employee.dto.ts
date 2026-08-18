@@ -1,5 +1,6 @@
 export class CreateEmployeeDto {
     employee_name!:string;
-    employee_id!: number;
+    e_email!:string;
+    
    
 }

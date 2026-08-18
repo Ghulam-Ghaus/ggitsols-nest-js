@@ -5,7 +5,6 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 import { FindTaskDto } from './dto/find-task.dto';
 
 
-
 @Controller('task')
 export class TaskController {
   constructor(private readonly taskService: TaskService) { }
