@@ -4,4 +4,5 @@ import { CreateEmployeeDto } from './create-employee.dto';
 export class UpdateEmployeeDto extends PartialType(CreateEmployeeDto) {
     id!:number;
     e_email!:string;
+    employee_name!:string;
 }

@@ -5,4 +5,7 @@ export class UpdateTaskDto extends PartialType(CreateTaskDto) {
     id!: number;
     status!: string;
     adminId!: number;
+    title!: string;
+    description!: string;
+    employee_id!: number;
 }

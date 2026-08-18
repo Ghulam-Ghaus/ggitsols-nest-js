@@ -29,12 +29,13 @@ export class EmployeeService {
     return await this.employeeRepository.findOne({ where: { id } })
   }
   async update(id: number, updateEmployeeDto: UpdateEmployeeDto) {
-    const task = await this.employeeRepository.findOne({ where: { id } })
-    if (!task) {
+    const emp = await this.employeeRepository.findOne({ where: { id } })
+    if (!emp) {
       return "Task not found";
     }
-    task.e_email = updateEmployeeDto.e_email;
-    return await this.employeeRepository.save(task)
+    emp.e_email = updateEmployeeDto.e_email;
+    emp.employee_name= updateEmployeeDto.employee_name;
+     return await this.employeeRepository.save(emp)
 
   }
   async remove(id: number) {

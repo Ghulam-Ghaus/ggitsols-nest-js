@@ -42,7 +42,20 @@ export class TaskService {
     if (!task) {
       return 'task not found!'
     }
-    task.status = updateTaskDto.status
+    if(task.title){
+      task.status = updateTaskDto.status
+      
+    }
+    if(task.title){
+    task.description=updateTaskDto.description
+    }
+    if(task.title){
+      task.title=updateTaskDto.title
+    }
+    if(task.title){
+      task.employee_id= updateTaskDto.employee_id
+
+    }    
     return this.tasksRepository.save(task)
   }
 
