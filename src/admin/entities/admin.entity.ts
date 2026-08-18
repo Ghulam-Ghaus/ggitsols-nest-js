@@ -12,7 +12,7 @@ export class Admin {
   email!: string;
 
   @Column()
-  password!: string; // Ensure name is exactly 'password'
+  password!: string; 
 
   @Column({ default: 'draft' })
   status!: string;

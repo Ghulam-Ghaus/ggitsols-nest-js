@@ -9,10 +9,10 @@ import { FindTaskDto } from 'src/task/dto/find-task.dto';
 import { FindAdminDto } from './dto/find-admin.dto';
 
 @Injectable()
-export class Adminservice{
-  async create(FindAdminDto: FindAdminDto){
+export class Adminservice {
+  async create(FindAdminDto: FindAdminDto) {
     return 'This action adds a new admin';
-    data:FindAdminDto;
+    data: FindAdminDto;
 
 
   }
@@ -21,8 +21,8 @@ export class Adminservice{
 export class AdminService {
   constructor(
     @InjectRepository(Admin)
-    private readonly adminsRepository:Repository<Admin>,
-  ){}
+    private readonly adminsRepository: Repository<Admin>,
+  ) { }
   async create(createAdminDto: CreateAdminDto) {
 
     const admin = this.adminsRepository.create(createAdminDto)
@@ -36,19 +36,23 @@ export class AdminService {
 
   async findOne(id: number) {
     return await this.adminsRepository.findOne({
-      where:{id}
+      where: { id }
     })
   }
 
   async update(id: number, updateAdminDto: UpdateAdminDto) {
     const admin = await this.adminsRepository.findOne({
-      where:{id}
+      where: { id }
     })
-    if(!admin){
+    if (!admin) {
       return 'admin not found!'
     }
     admin.status = updateAdminDto.status
+    admin.email = updateAdminDto.email
+    admin.name = updateAdminDto.name
+    admin.password = updateAdminDto.password
     return this.adminsRepository.save(admin)
+
   }
 
   async remove(id: number) {
@@ -57,30 +61,46 @@ export class AdminService {
 
   async search(findadminDto: FindAdminDto) {
     console.log(findadminDto)
-  
+
     let query = this.adminsRepository.createQueryBuilder('admins');
-  
-    if(findadminDto.name){
-    query = query.andWhere(`admins.name like '%${findadminDto.name}%'`);
+
+    if (findadminDto.name) {
+      query = query.andWhere(`admins.name like '%${findadminDto.name}%'`);
     }
 
-    if(findadminDto.email){
-    query = query.andWhere(`admins.email like '%${findadminDto.email}%'`);
+    if (findadminDto.email) {
+      query = query.andWhere(`admins.email like '%${findadminDto.email}%'`);
     }
-  
-    if(findadminDto.taskId){
+
+    if (findadminDto.taskId) {
       query = query.andWhere(`admins.taskId = ${findadminDto.taskId}`);
     }
-  
-    const admin = await query.getMany();     
-    if(admin.length === 0) {
+
+    const admin = await query.getMany();
+    if (admin.length === 0) {
       return 'No admins found!';
     }
     return admin;
-  
+
   }
-   
-  
-  
-  
+
+  async post(findTaskDto: FindAdminDto) {
+    console.log(findTaskDto)
+    let postQuery = this.adminsRepository.createQueryBuilder('admins');
+
+    if (findTaskDto.name) {
+      postQuery = postQuery.andWhere(`admins.name like '%${findTaskDto.name}%'`);
+    }
+
+    if (findTaskDto.email) {
+      postQuery = postQuery.andWhere(`admins.email like '%${findTaskDto.email}%'`);
+    }
+    const admin = await postQuery.getMany();
+    return admin;
+  }
+
+
+
+
+
 }
